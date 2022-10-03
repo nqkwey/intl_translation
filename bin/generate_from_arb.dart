@@ -211,9 +211,7 @@ void generateLocaleFile(String locale, List<Map> localeData, String targetDir,
   List<TranslatedMessage> translations = [];
   for (/*Map<String, String>*/ Map jsonTranslations in localeData) {
     jsonTranslations.forEach((id, messageData) {
-      print('message: $messageData');
       if (messageData is! Map) {
-        print('messageMap: ${messageData.entries.map((e) => '${e.key} | ${e.value}').join(', ')}');
         TranslatedMessage message = recreateIntlObjects(id, messageData);
         if (message != null) {
           translations.add(message);
