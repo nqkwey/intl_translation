@@ -212,12 +212,12 @@ void generateLocaleFile(String locale, List<Map> localeData, String targetDir,
   for (/*Map<String, String>*/ Map jsonTranslations in localeData) {
     jsonTranslations.forEach((id, messageData) {
       print('message: $messageData');
-      if (messageData is Map) {
+      if (messageData is! Map) {
         print('messageMap: ${messageData.entries.map((e) => '${e.key} | ${e.value}').join(', ')}');
-      }
-      TranslatedMessage message = recreateIntlObjects(id, messageData);
-      if (message != null) {
-        translations.add(message);
+        TranslatedMessage message = recreateIntlObjects(id, messageData);
+        if (message != null) {
+          translations.add(message);
+        }
       }
     });
   }
