@@ -56,7 +56,7 @@ class MessageGeneration {
   bool useDeferredLoading = true;
 
   /// Whether to generate null safe code instead of legacy code.
-  bool nullSafety = false;
+  bool nullSafety = true;
 
   /// The mode to generate in - either 'release' or 'debug'.
   ///
@@ -75,9 +75,9 @@ class MessageGeneration {
   /// Holds the generated translations.
   StringBuffer output = StringBuffer();
 
-  String get orNull => nullSafety ? '?' : '';
+  String get orNull => nullSafety ? '' : '';
 
-  String get notNull => nullSafety ? '!' : '';
+  String get notNull => nullSafety ? '' : '';
 
   String get orLate => nullSafety ? 'late ' : '';
 
