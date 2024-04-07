@@ -3,7 +3,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.10
 
 /// This script uses the extract_messages.dart library to find the Intl.message
 /// calls in the target dart files and produces ARB format output. See
@@ -20,13 +19,13 @@ import 'package:intl_translation/src/directory_utils.dart';
 import 'package:path/path.dart' as path;
 
 void main(List<String> args) {
-  String targetDir;
-  String outputFilename;
-  String sourcesListFile;
-  bool transformer;
+  String? targetDir;
+  String? outputFilename;
+  String? sourcesListFile;
+  bool? transformer;
   var parser = ArgParser();
   var extraction = MessageExtraction();
-  String locale;
+  String? locale;
   parser.addFlag('suppress-last-modified',
       defaultsTo: false,
       callback: (x) => extraction.suppressLastModified = x,
@@ -102,11 +101,11 @@ void main(List<String> args) {
       (k, v) => allMessages.addAll(
         toARB(v,
             includeSourceText: extraction.includeSourceText,
-            supressMetadata: extraction.suppressMetaData),
+            supressMetadata: extraction.suppressMetaData) ?? {},
       ),
     );
   }
-  var file = File(path.join(targetDir, outputFilename));
+  var file = File(path.join(targetDir ?? '', outputFilename));
   var encoder = JsonEncoder.withIndent('  ');
   file.writeAsStringSync(encoder.convert(allMessages));
   if (extraction.hasWarnings && extraction.warningsAreErrors) {
